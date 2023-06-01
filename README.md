@@ -1,4 +1,4 @@
-# streaming-ts
+# gRpc streaming client typescript
 
 A client-gRPC streaming written in TypeScript for browser applications. The focus is on simplicity, reliability, and extensibility. It provides convenient features to automatically reconnect and convert data to object.
 
