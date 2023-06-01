@@ -1,0 +1,58 @@
+{
+    "name": "@nixjs23n6/grpc-stream-client",
+    "version": "1.0.0",
+    "description": "gRPC Client Streaming that will automatically reconnect if the connection is closed.",
+    "main": "lib/cjs/index.js",
+    "module": "lib/esm/index.js",
+    "browser": "lib/esm/index.js",
+    "types": "lib/types/index.d.ts",
+    "files": [
+        "lib",
+        "README.md"
+    ],
+    "author": "nghinv",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "sideEffects": false,
+    "scripts": {
+        "clean": "rimraf lib/*",
+        "build:pre": "run-s clean",
+        "build:cjs": "tsc -p tsconfig.cjs.json",
+        "build:esm": "tsc -p tsconfig.esm.json",
+        "build": "run-s build:pre build:cjs build:esm",
+        "lint": "eslint 'src/**/*.{ts,tsx}'",
+        "format": "prettier --write '**/*.{ts,tsx,json}'",
+        "prepare": "is-ci || husky install"
+    },
+    "dependencies": {
+        "@nixjs23n6/backoff-typescript": "^0.0.1",
+        "@nixjs23n6/objectify": "^0.0.1",
+        "@nixjs23n6/types": "^1.0.15",
+        "google-protobuf": ">=3.21.0",
+        "grpc-web": ">=1.4"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^17.0.3",
+        "@commitlint/config-conventional": "^17.0.3",
+        "@types/eslint": "^8.4.3",
+        "@types/eslint-plugin-prettier": "^3.1.0",
+        "@types/google-protobuf": "^3.15.6",
+        "@types/node": "^18.0.0",
+        "@types/prettier": "^2.6.3",
+        "@types/react": "^18.0.14",
+        "@typescript-eslint/eslint-plugin": "^5.30.0",
+        "@typescript-eslint/parser": "^5.30.0",
+        "eslint": "^8.18.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "husky": "^8.0.0",
+        "is-ci": "^3.0.1",
+        "lerna": "^6.1.0",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^2.7.1",
+        "rimraf": "^3.0.2",
+        "typescript": "^4.7.4"
+    }
+}
