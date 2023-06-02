@@ -57,7 +57,7 @@ export class ChatClient {
 Create a new instance with the provided `StreamBuilder`:
 
 ```typescript
-const client = new ChatClient()
+const client = new ChatClient("host_name_url")
 const stream = new StreamBuilder(client, 'room').build();
 ```
 
@@ -66,7 +66,7 @@ const stream = new StreamBuilder(client, 'room').build();
 Add a request into builder:
 
 ```typescript
-const client = new ChatClient()
+const client = new ChatClient("host_name_url")
 const stream = new StreamBuilder(client, 'room').withRequest(new google_protobuf_empty_pb.Empty()).build();
 ```
 
@@ -75,7 +75,7 @@ const stream = new StreamBuilder(client, 'room').withRequest(new google_protobuf
 Add a metada into buider:
 
 ```typescript
-const client = new ChatClient()
+const client = new ChatClient("host_name_url")
 let deadline = new Date()
 deadline.setSeconds(deadline.getSeconds() + BaseTimeoutStreamingRequest).toString()
 const authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
@@ -99,7 +99,7 @@ export enum StreamEvents {
 The callbacks are called with the issuing streaming-instance and the causing event as arguments:
 
 ```typescript
-const client = new ChatClient()
+const client = new ChatClient("host_name_url")
 const stream = new StreamBuilder(client, 'room')
     .onData((i, data) => console.log('[Stream] data', data)))
     .onEnd((i) => console.log('[Stream] Ended'))
@@ -121,7 +121,7 @@ stream.removeEventListener(StreamEvents.data, dataEventListener);
 You can update `metadata` or `request` when using `onRetry` method
 
 ```typescript
-const client = new ChatClient()
+const client = new ChatClient("host_name_url")
 const stream = new StreamBuilder(client, 'room')
     .onRetry(async (instance) => {
         const token = await requestNewAccessToken()
@@ -147,41 +147,41 @@ yarn add @nixjs23n6/backoff-typescript
 npm install @nixjs23n6/backoff-typescript
 ```
 
-##### ConstantBackoff
+##### ConstantBackOff
 
-The `ConstantBackoff` will make the streaming wait a constant time between each connection retry. To use the `ConstantBackoff`
+The `ConstantBackOff` will make the streaming wait a constant time between each connection retry. To use the `ConstantBackOff`
 with a wait-time of `1 second`:
 
 ```typescript
-const client = new ChatClient()
+const client = new ChatClient("host_name_url")
 const stream = new StreamBuilder(client, 'room')
-    .withBackoff(new ConstantBackoff(1000)) // 1000ms = 1s
+    .withBackoff(new ConstantBackOff(1000)) // 1000ms = 1s
     .build();
 ```
 
-##### LinearBackoff
+##### LinearBackOff
 
-The `LinearBackoff` linearly increases the wait-time between connection-retries until an optional maximum is reached.
-To use the `LinearBackoff` to initially wait `0 seconds` and increase the wait-time by `1 second` with every retry until
+The `LinearBackOff` linearly increases the wait-time between connection-retries until an optional maximum is reached.
+To use the `LinearBackOff` to initially wait `0 seconds` and increase the wait-time by `1 second` with every retry until
 a maximum of `8 seconds` is reached:
 
 ```typescript
-const client = new ChatClient()
+const client = new ChatClient("host_name_url")
 const stream = new StreamBuilder(client, 'room')
-    .withBackoff(new LinearBackoff(0, 1000, 8000))
+    .withBackoff(new LinearBackOff(0, 1000, 8000))
     .build();
 ```
 
-##### ExponentialBackoff
+##### ExponentialBackOff
 
-The `ExponentialBackoff` doubles the backoff with every retry until a maximum is reached. This is modelled after the binary
-exponential-backoff algorithm used in computer-networking. To use the `ExponentialBackoff` that will produce the series
+The `ExponentialBackOff` doubles the backoff with every retry until a maximum is reached. This is modelled after the binary
+exponential-backoff algorithm used in computer-networking. To use the `ExponentialBackOff` that will produce the series
 `[100, 200, 400, 800, 1600, 3200, 6400]`:
 
 ```typescript
-const client = new ChatClient()
+const client = new ChatClient("host_name_url")
 const stream = new StreamBuilder(client, 'room')
-    .withBackoff(new ExponentialBackoff(100, 7))
+    .withBackoff(new ExponentialBackOff(100, 7))
     .build();
 ```
 

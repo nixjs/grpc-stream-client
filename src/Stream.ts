@@ -108,7 +108,7 @@ export class Stream {
 
     private handleErrorEvent = (ev: grpcWeb.RpcError) => this.handleEvent(StreamEvents.error, ev)
 
-    private handleMessageEvent = (ev: any) => this.handleEvent(StreamEvents.data, ev)
+    private handleMessageEvent = (ev: any) => this.handleEvent(StreamEvents.data, this.options?.isObject ? ev?.toObject() : ev)
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     private handleEvent<K extends StreamEvents>(type: K, ev: StreamEventMap[K]) {

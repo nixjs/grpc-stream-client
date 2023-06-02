@@ -16,4 +16,5 @@ export interface RetryEventDetails {
 export interface Options {
     retry?: boolean
     retries?: number
+    isObject?: boolean
 }
